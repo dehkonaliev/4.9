@@ -3,9 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books List</title>
+    <title>Discover Books | Library Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
-    
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased">
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="bg-indigo-600 text-white p-2 rounded-xl shadow-md shadow-indigo-100">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">Book<span class="text-indigo-600">Verse</span></span>
+                </div>
+
+                <!-- Navigation Links / Meta -->
+                <div class="hidden sm:flex items-center gap-6 text-sm font-medium text-slate-600">
+                    <a href="#" class="text-indigo-600 hover:text-indigo-700 transition">Explore</a>
+                    <a href="#" class="hover:text-slate-900 transition">My Bookshelf</a>
+                    <a href="#" class="hover:text-slate-900 transition">Categories</a>
+                    <a href="#" class="hover:text-slate-900 transition">About</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="flex items-center gap-4">
+                    <button class="p-2 text-slate-400 hover:text-slate-600 transition rounded-lg hover:bg-slate-100">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-100 hover:shadow-indigo-200">
+                        New Arrival
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        
+        <!-- Hero and Info Section -->
+        <div class="mb-10 text-center sm:text-left">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                Our Literary Collection
+            </h1>
+            <p class="text-lg text-slate-500 max-w-2xl leading-relaxed">
+                Dive into our curated database of rich stories, academic resources, and creative publications updated by creators globally.
+            </p>
+            
+            <!-- Quick Filter Bar (Aesthetic placeholder for layout richness) -->
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-6 pb-2 border-b border-slate-200">
+                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">Filters:</span>
+                <button class="px-3.5 py-1.5 bg-indigo-50 text-indigo-700 rounded-full text-xs font-semibold hover:bg-indigo-100 transition">All Books</button>
+                <button class="px-3.5 py-1.5 bg-white text-slate-600 border border-slate-200 rounded-full text-xs font-medium hover:bg-slate-50 transition">Featured</button>
+                <button class="px-3.5 py-1.5 bg-white text-slate-600 border border-slate-200 rounded-full text-xs font-medium hover:bg-slate-50 transition">Recent Release</button>
+            </div>
+        </div>
+
+        <!-- Books Grid Layout -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+            {% for book in books %}
+            <article class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col group h-full">
+                
+                <!-- Book Cover / Image Wrapper -->
+                <div class="relative aspect-[3/4] w-full bg-slate-100 overflow-hidden flex items-center justify-center">
+                    {% if book.photo %}
+                    <img src="{{ book.photo.url }}" 
+                         alt="{{ book.title }} cover" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                         loading="lazy"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    {% endif %}
+
+                    <!-- Fallback SVG Placeholder (triggers if no image or image fails to load) -->
+                    <div class="absolute inset-0 hidden flex-col items-center justify-center bg-gradient-to-tr from-slate-100 to-slate-200 text-slate-400 p-6 text-center select-none"
+                         style="{% if not book.photo %}display: flex;{% endif %}">
+                        <svg class="w-12 h-12 mb-2 text-slate-300 group-hover:text-indigo-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        <span class="text-xs font-semibold tracking-wider text-slate-400 uppercase">No Cover Art</span>
+                        <span class="text-[10px] text-slate-400 mt-1 line-clamp-2 italic px-2">"{{ book.title }}"</span>
+                    </div>
+
+                    <!-- Category tag / Floating badge -->
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-white/90 backdrop-blur-md text-slate-800 text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg shadow-sm">
+                            Literature
+                        </span>
+                    </div>
+
+                    <!-- Price Tag Badge -->
+                    {% if book.price %}
+                    <div class="absolute bottom-4 right-4">
+                        <span class="bg-indigo-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg shadow-indigo-600/20">
+                            ${{ book.price }}
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <!-- Author & Date -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs font-semibold text-indigo-600 hover:underline cursor-pointer truncate max-w-[120px]">
+                            {{ book.author }}
+                        </span>
+                        <span class="text-slate-300 text-xs">•</span>
+                        <span class="text-[11px] text-slate-400 font-medium">
+                            {{ book.created_at|date:"M d, Y" }}
+                        </span>
+                    </div>
+
+                    <!-- Book Title -->
+                    <h2 class="text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors line-clamp-2 min-h-[3rem] leading-snug mb-2" title="{{ book.title }}">
+                        {{ book.title }}
+                    </h2>
+
+                    <!-- Summary / Snippet -->
+                    <p class="text-slate-500 text-xs leading-relaxed line-clamp-3 mb-5 flex-grow">
+                        {{ book.summary }}
+                    </p>
+
+                    <!-- Card Action Button -->
+                    <div class="pt-4 border-t border-slate-100 mt-auto flex items-center justify-between">
+                        <button class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs flex items-center gap-1.5 transition-colors group/btn">
+                            Explore Details
+                            <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                        <span class="text-slate-300 text-xs">ID: #{{ forloop.counter }}</span>
+                    </div>
+                </div>
+            </article>
+
+            {% empty %}
+            <!-- No Books Empty State -->
+            <div class="col-span-full bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm">
+                <div class="w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-800 mb-1">No Books Available</h3>
+                <p class="text-slate-500 text-sm max-w-sm mx-auto mb-6">
+                    Our digital shelves are temporarily empty. Please register or check back later for exciting reads.
+                </p>
+                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs py-2.5 px-5 rounded-xl transition">
+                    Upload First Book
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="bg-slate-100 text-slate-600 p-1.5 rounded-lg">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <span class="text-sm font-semibold text-slate-950">BookVerse Library</span>
+            </div>
+            <p class="text-xs text-slate-400">
+                &copy; 2026 BookVerse. Designed dynamically for modern Django web apps.
+            </p>
+        </div>
+    </footer>
+
 </body>
 </html>

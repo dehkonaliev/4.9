@@ -1,0 +1,10 @@
+<form method="POST" action="/new-book/" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input name="title" type="text" placeholder="title">
+    <input type="text" name="summary" placeholder="summary">
+    <input type="text" name="author" placeholder="author">
+    <input type="text" name="price" placeholder="price">
+    <input type="file" name="photo">
+    <button type="submit">Saqlash</button>
+
+</form>
