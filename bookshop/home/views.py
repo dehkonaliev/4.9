@@ -30,3 +30,8 @@ def add_book(request):
         return redirect('book_list')
     
     return render(request, 'add_book.html')
+
+def detailed(request, pk):
+    book = Book.objects.get(pk=pk)
+    
+    return render(request, 'detailed.html', {'book':book})
