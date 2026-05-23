@@ -1,0 +1,253 @@
+
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA Laptops - Explore Store Catalog</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            950: '#030712',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-900 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding / Logo -->
+                <a href="{% url 'home' %}" class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform duration-300">
+                        N
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">NEBULA</span>
+                        <span class="block text-xs text-blue-400 font-semibold tracking-widest uppercase">LAPTOPS</span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-2">
+                    <a href="{% url 'add' %}" class="px-5 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-900 transition-all duration-300 flex items-center gap-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        Add Laptop
+                    </a>
+                    <a href="{% url 'explore' %}" class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 bg-blue-600/10 text-blue-400 border border-blue-500/20 shadow-sm shadow-blue-500/5">
+                        <i data-lucide="compass" class="w-4 h-4"></i>
+                        Explore Store
+                    </a>
+                </nav>
+
+                <!-- Right Action Icons (Contact or Cart) -->
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 cursor-default">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="flex-grow">
+        
+        <!-- Catalog Header Banner -->
+        <div class="relative overflow-hidden py-12 border-b border-slate-900 bg-slate-950/60">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-none">
+                    Engineered Hardware Catalogs
+                </h1>
+                <p class="mt-4 text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
+                    Explore our professional collection of premium performance computers.
+                </p>
+            </div>
+        </div>
+
+        <!-- Catalog Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                
+                <!-- Left Column Sidebar Filter Layout -->
+                <div class="lg:col-span-1 space-y-6">
+                    <form method="GET" action="{% url 'explore' %}" class="p-6 rounded-2xl bg-slate-900/60 border border-slate-900 backdrop-blur-sm space-y-6 sticky top-28">
+                        <div class="flex items-center justify-between border-b border-slate-800/60 pb-4">
+                            <span class="font-bold text-slate-200 flex items-center gap-2 text-sm uppercase tracking-wider">
+                                <i data-lucide="sliders-horizontal" class="w-4 h-4 text-blue-500"></i> Filters
+                            </span>
+                            <a href="{% url 'explore' %}" class="text-xs text-blue-400 hover:text-blue-300 transition-colors">
+                                Reset Filters
+                            </a>
+                        </div>
+
+                        <!-- Filter Item: Search term -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest block">Keyword Search</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                    <i data-lucide="search" class="w-4 h-4"></i>
+                                </span>
+                                <input type="text" name="q" placeholder="Model, CPU, Brand..." value="{{ request.GET.q|default:'' }}" class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-100 placeholder-slate-600 outline-none text-xs transition-all duration-200">
+                            </div>
+                        </div>
+
+                        <!-- Filter Item: Category Selector -->
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase tracking-widest block">Selected Theme</label>
+                            <select name="category" onchange="this.form.submit()" class="w-full px-3 py-2 text-xs rounded-lg bg-slate-950 border border-slate-800 text-slate-300 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none">
+                                <option value="">All Categories</option>
+                                <option value="Gaming" {% if request.GET.category == "Gaming" %}selected{% endif %}>Gaming Powerhouse</option>
+                                <option value="Creator" {% if request.GET.category == "Creator" %}selected{% endif %}>Creative & Design</option>
+                                <option value="Ultrabook" {% if request.GET.category == "Ultrabook" %}selected{% endif %}>Ultrabook (Thin & Light)</option>
+                                <option value="Business" {% if request.GET.category == "Business" %}selected{% endif %}>Enterprise Business</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-600/20 transition-all duration-300">
+                            Apply Parameters
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column Products Grid Layout -->
+                <div class="lg:col-span-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        {% for l in laptops %}
+                        <div class="group bg-slate-900 rounded-2xl border border-slate-850 overflow-hidden hover:border-blue-500/30 transition-all duration-300 flex flex-col hover:scale-[1.01] hover:shadow-xl hover:shadow-blue-500/5">
+                            
+                            <!-- Visual Graphic Area -->
+                            <div class="h-48 bg-gradient-to-b from-slate-900 via-slate-950 to-indigo-950 relative flex items-center justify-center overflow-hidden transition-all duration-300">
+                                <div class="absolute inset-0 bg-black/10 group-hover:scale-105 transition-transform duration-500"></div>
+                                
+                                <!-- Dynamic Image Tag with Custom Failover Placeholders -->
+                                <img src="{{ l.image.url }}" alt="{{ l.model }}" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/3b82f6?text={{ l.model|urlencode }}';">
+                                
+                                <!-- Category Colored Badges -->
+                                <span class="absolute top-4 left-4 text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-800 text-blue-400">
+                                    {{ l.color|default:"Premium Edition" }}
+                                </span>
+                            </div>
+
+                            <!-- Card Spec details container -->
+                            <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{{ l.brand }}</span>
+                                        <div class="flex items-center gap-1 text-amber-400 text-xs font-semibold">
+                                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 4.9
+                                        </div>
+                                    </div>
+                                    <h3 class="text-base font-extrabold text-white group-hover:text-blue-400 transition-colors line-clamp-1">{{ l.model }}</h3>
+                                </div>
+
+                                <!-- Hardware Spec Badges layout grid -->
+                                <div class="grid grid-cols-2 gap-x-3 gap-y-2 py-3 border-t border-b border-slate-950 text-xs font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="monitor" class="w-3.5 h-3.5 text-blue-500 flex-shrink-0"></i>
+                                        <span class="truncate">{{ l.screen_size|default:"High Res Display" }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="palette" class="w-3.5 h-3.5 text-blue-500 flex-shrink-0"></i>
+                                        <span class="truncate">{{ l.color|default:"Slate Finish" }}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Features descriptive section -->
+                                <p class="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                                    {{ l.features }}
+                                </p>
+
+                                <!-- Pricing Row & CTA -->
+                                <div class="pt-2 flex items-center justify-between">
+                                    <span class="text-xl font-black text-white font-mono">${{ l.price }}</span>
+                                    <button class="px-4 py-2 rounded-xl bg-slate-950 group-hover:bg-blue-600 border border-slate-800 group-hover:border-blue-500 text-slate-300 group-hover:text-white text-xs font-bold transition-all duration-300 flex items-center gap-1.5">
+                                        Order Specifications
+                                        <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% empty %}
+                        <!-- Empty Catalog State Card -->
+                        <div class="col-span-full flex flex-col items-center justify-center py-20 bg-slate-900/40 rounded-3xl border border-slate-900">
+                            <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 mb-4">
+                                <i data-lucide="package-search" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">No Laptops Found</h3>
+                            <p class="text-slate-400 text-sm mt-1 text-center max-w-sm px-6">We couldn't find any products in our database. Verify your Django view models and template context keys.</p>
+                            <a href="{% url 'explore' %}" class="mt-6 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 rounded-xl text-xs font-semibold text-white transition-colors">
+                                Reset Store Filter
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="pt-8 mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-slate-600">
+                <span>&copy; 2026 Nebula Laptops Inc. Hardware E-Commerce View.</span>
+                <div class="flex gap-4">
+                    <a href="{% url 'home' %}" class="hover:text-slate-450 transition-colors">Return Home</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors font-semibold">Quality Guarantee</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

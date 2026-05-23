@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEBULA Laptops - Add New Laptop Spec Profile</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            950: '#030712',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Main Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-900 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding / Logo -->
+                <a href="{% url 'home' %}" class="flex items-center gap-3 cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform duration-300">
+                        N
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">NEBULA</span>
+                        <span class="block text-xs text-blue-400 font-semibold tracking-widest uppercase">LAPTOPS</span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-2">
+                    <a href="{% url 'home' %}" class="px-5 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-900 transition-all duration-300 flex items-center gap-2">
+                        <i data-lucide="home" class="w-4 h-4"></i>
+                        Home Welcome
+                    </a>
+                    <a href="{% url 'explore' %}" class="px-5 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-100 hover:bg-slate-900 transition-all duration-300 flex items-center gap-2">
+                        <i data-lucide="compass" class="w-4 h-4"></i>
+                        Explore Store
+                    </a>
+                    <a href="#" class="px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 bg-blue-600/10 text-blue-400 border border-blue-500/20 shadow-sm shadow-blue-500/5">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        Add New Laptop
+                    </a>
+                </nav>
+
+                <!-- Right Action Icons (Contact or Cart) -->
+                <div class="flex items-center gap-3">
+                    <a href="{% url 'explore' %}" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-all duration-300">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Header Banner -->
+        <div class="relative overflow-hidden py-12 border-b border-slate-900 bg-slate-950/60">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-xs font-semibold tracking-wider text-blue-400 uppercase mb-4">
+                    Inventory Control Panel
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-none">
+                    Register New Laptop Hardware
+                </h1>
+                <p class="mt-4 text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
+                    Configure specialized performance systems and inject specs straight into the database catalog.
+                </p>
+            </div>
+        </div>
+
+        <!-- -->
+        <!-- Form and Preview Grid Layout -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+                
+                <!-- Left Column: Input Form -->
+                <div class="lg:col-span-7 bg-slate-900/40 border border-slate-900 p-8 rounded-3xl backdrop-blur-sm shadow-xl">
+                    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2 pb-4 border-b border-slate-800/80">
+                            <i data-lucide="cpu" class="text-blue-500 w-5 h-5"></i> Spec Configuration Sheet
+                        </h3>
+
+                        <!-- Row 1: Brand & Model -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Brand / Manufacturer</label>
+                                <input type="text" name="brand" id="id_brand" placeholder="e.g. Asus, Apple, Razer" required oninput="updatePreview()"
+                                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-100 placeholder-slate-600 outline-none text-sm transition-all duration-200">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Model Name</label>
+                                <input type="text" name="model" id="id_model" placeholder="e.g. Blade 16 Elite" required oninput="updatePreview()"
+                                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-100 placeholder-slate-600 outline-none text-sm transition-all duration-200">
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Price & Features -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">List Price ($ USD)</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 font-mono text-sm">$</span>
+                                    <input type="text" name="price" id="id_price" placeholder="1999" required oninput="updatePreview()"
+                                        class="w-full pl-8 pr-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-100 placeholder-slate-600 outline-none text-sm transition-all duration-200 font-mono">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Display Size Parameters</label>
+                                <select name="screen_size" id="id_screen_size" onchange="updatePreview()"
+                                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-300 outline-none text-sm transition-all duration-200">
+                                    <option value="13.4">13.4-inch OLED QHD+</option>
+                                    <option value="14.0" selected>14.0-inch Liquid Retina</option>
+                                    <option value="15.6">15.6-inch FHD 144Hz</option>
+                                    <option value="16.0">16.0-inch Mini-LED 240Hz</option>
+                                    <option value="17.3">17.3-inch Ultra HD 4K</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Color Finish & Image File -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Chassis Color Finish</label>
+                                <select name="color" id="id_color" onchange="updatePreview()"
+                                    class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-300 outline-none text-sm transition-all duration-200">
+                                    <option value="black" selected>Cosmic Black</option>
+                                    <option value="white">Mercury White</option>
+                                    <option value="gray">Space Grey</option>
+                                    <option value="cream">Titanium Silver</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Product Showcase Image</label>
+                                <div class="relative w-full">
+                                    <input blank="true" type="file" name="image" id="id_image" accept="image/*" required onchange="handleImageFile(this)"
+                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                                    <div id="file-uploader-box" class="w-full px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-blue-500 transition-all duration-200 text-sm flex items-center gap-3">
+                                        <i data-lucide="upload-cloud" class="w-4 h-4 text-blue-500 flex-shrink-0"></i>
+                                        <span id="file-name-display" class="truncate font-semibold text-xs">Choose visual image file...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Row 4: Short Description / Features -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Detailed System Features / Copy description</label>
+                            <textarea name="features" id="id_features" rows="4" placeholder="Briefly highlight hardware thermal pipelines, computing thresholds, and target audience benefits..." required oninput="updatePreview()"
+                                class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-slate-100 placeholder-slate-600 outline-none text-sm transition-all duration-200 resize-none"></textarea>
+                        </div>
+
+                        <!-- Action buttons panel -->
+                        <div class="pt-6 border-t border-slate-800/80 flex items-center justify-end gap-3">
+                            <button type="reset" onclick="resetFormPreview()" class="px-6 py-3 rounded-xl bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-400 hover:text-white text-xs font-bold transition-all duration-200">
+                                Reset Inputs
+                            </button>
+                            <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-blue-500/20 transition-all duration-200 flex items-center gap-2">
+                                <i data-lucide="plus-circle" class="w-4 h-4"></i> Add Laptop Specification
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- -->
+                <!-- Right Column: Interactive Live Card Preview -->
+                <div class="lg:col-span-5 lg:sticky lg:top-28">
+                    <div class="text-center mb-4">
+                        <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">Dynamic Hardware Preview</span>
+                    </div>
+
+                    <!-- Laptop Card Wrapper -->
+                    <div class="p-5 rounded-3xl bg-slate-900/40 border-2 border-dashed border-slate-800 relative transition-all duration-300">
+                        <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-850 flex flex-col h-full">
+                            
+                            <!-- Card Graphic Block -->
+                            <div class="h-48 bg-gradient-to-b from-slate-900 via-slate-950 to-indigo-950 relative flex items-center justify-center overflow-hidden">
+                                <div class="absolute inset-0 bg-black/10"></div>
+                                
+                                <!-- Preview Image displaying local URL dynamically or default template logic -->
+                                <img id="card-preview-img" src="https://placehold.co/600x400/0f172a/3b82f6?text=Hardware+Upload" alt="Live Preview Spec" 
+                                     class="w-full h-full object-cover transition-transform duration-500">
+                                
+                                <span id="card-preview-color-badge" class="absolute top-4 left-4 text-[10px] uppercase font-bold tracking-widest px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-800 text-blue-400">
+                                    Cosmic Black
+                                </span>
+                            </div>
+
+                            <!-- Card details container -->
+                            <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between">
+                                        <span id="card-preview-brand" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">BRAND</span>
+                                        <div class="flex items-center gap-1 text-amber-400 text-xs font-semibold">
+                                            <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i> 5.0 New
+                                        </div>
+                                    </div>
+                                    <h3 id="card-preview-model" class="text-base font-extrabold text-white line-clamp-1">Hardware Spec Model</h3>
+                                </div>
+
+                                <!-- Hardware Spec Icons Grid -->
+                                <div class="grid grid-cols-2 gap-x-3 gap-y-2 py-3 border-t border-b border-slate-950 text-xs font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="monitor" class="w-3.5 h-3.5 text-blue-500 flex-shrink-0"></i>
+                                        <span id="card-preview-screen" class="truncate">14.0-inch Liquid Retina</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="palette" class="w-3.5 h-3.5 text-blue-500 flex-shrink-0"></i>
+                                        <span id="card-preview-color" class="truncate">Cosmic Black</span>
+                                    </div>
+                                </div>
+
+                                <!-- Features section -->
+                                <p id="card-preview-features" class="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                                    Briefly highlight hardware features and system properties instantly as you fill in the configuration sheet.
+                                </p>
+
+                                <!-- Pricing details bottom block -->
+                                <div class="pt-2 flex items-center justify-between">
+                                    <span class="text-xl font-black text-white font-mono">$<span id="card-preview-price">0</span></span>
+                                    <button type="button" class="px-4 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 text-xs font-bold flex items-center gap-1.5 cursor-default">
+                                        Order Specifications
+                                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="pt-8 mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-slate-600">
+                <span>&copy; 2026 Nebula Laptops Inc. Admin Registry Console.</span>
+                <div class="flex gap-4">
+                    <a href="{% url 'home' %}" class="hover:text-slate-400 transition-colors">Return Home</a>
+                    <a href="{% url 'explore' %}" class="hover:text-slate-400 transition-colors">Cancel Registry</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LIVE BINDINGS -->
+    <script>
+        // Init Icons on mount
+        lucide.createIcons();
+
+        // Target form fields
+        const brandInput = document.getElementById('id_brand');
+        const modelInput = document.getElementById('id_model');
+        const priceInput = document.getElementById('id_price');
+        const screenSelect = document.getElementById('id_screen_size');
+        const colorSelect = document.getElementById('id_color');
+        const featuresInput = document.getElementById('id_features');
+        const imageInput = document.getElementById('id_image');
+
+        // Target preview elements
+        const previewBrand = document.getElementById('card-preview-brand');
+        const previewModel = document.getElementById('card-preview-model');
+        const previewPrice = document.getElementById('card-preview-price');
+        const previewScreen = document.getElementById('card-preview-screen');
+        const previewColor = document.getElementById('card-preview-color');
+        const previewColorBadge = document.getElementById('card-preview-color-badge');
+        const previewFeatures = document.getElementById('card-preview-features');
+        const previewImg = document.getElementById('card-preview-img');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const fileUploaderBox = document.getElementById('file-uploader-box');
+
+        // Update preview layout instantly
+        function updatePreview() {
+            previewBrand.innerText = brandInput.value.trim() ? brandInput.value.toUpperCase() : "BRAND";
+            previewModel.innerText = modelInput.value.trim() ? modelInput.value.trim() : "Hardware Spec Model";
+            
+            // Format pricing nicely with commas
+            const numericPrice = parseFloat(priceInput.value.replace(/[^0-9.]/g, ''));
+            previewPrice.innerText = isNaN(numericPrice) ? '0' : numericPrice.toLocaleString();
+
+            previewScreen.innerText = screenSelect.value;
+            previewColor.innerText = colorSelect.value;
+            previewColorBadge.innerText = colorSelect.value;
+
+            previewFeatures.innerText = featuresInput.value.trim() ? featuresInput.value.trim() : "Briefly highlight hardware features and system properties instantly as you fill in the configuration sheet.";
+        }
+
+        // Handle image selections locally with URL pointers
+        function handleImageFile(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                fileNameDisplay.innerText = file.name;
+                fileUploaderBox.classList.add('border-blue-500', 'bg-blue-950/20');
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Reset elements default templates on clear trigger
+        function resetFormPreview() {
+            setTimeout(() => {
+                updatePreview();
+                previewImg.src = "https://placehold.co/600x400/0f172a/3b82f6?text=Hardware+Upload";
+                fileNameDisplay.innerText = "Choose visual image file...";
+                fileUploaderBox.classList.remove('border-blue-500', 'bg-blue-950/20');
+            }, 50);
+        }
+    </script>
+</body>
+</html>
