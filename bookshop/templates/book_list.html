@@ -47,9 +47,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-100 hover:shadow-indigo-200">
+                    <a href="{% url 'new-book' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-100 hover:shadow-indigo-200">
                         New Arrival
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -143,12 +143,12 @@
 
                     <!-- Card Action Button -->
                     <div class="pt-4 border-t border-slate-100 mt-auto flex items-center justify-between">
-                        <button class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs flex items-center gap-1.5 transition-colors group/btn">
+                        <a href="{% url 'detailed' book.id %}" class="text-indigo-600 hover:text-indigo-800 font-semibold text-xs flex items-center gap-1.5 transition-colors group/btn">
                             Explore Details
                             <svg class="w-3.5 h-3.5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </button>
+                        </a>
                         <span class="text-slate-300 text-xs">ID: #{{ forloop.counter }}</span>
                     </div>
                 </div>
