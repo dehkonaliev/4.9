@@ -18,9 +18,16 @@ def add(request):
         screen_size = request.POST.get('screen_size')
         features = request.POST.get('features')
         image = request.FILES.get('image')
-        
-        Computer.objects.create(model=model, brand=brand, color=color, screen_size=screen_size, features=features, price=price, image=image)
+        if not image:
+            Computer.objects.create(model=model, brand=brand, color=color, screen_size=screen_size, features=features, price=price)
+        else:
+            Computer.objects.create(model=model, brand=brand, color=color, screen_size=screen_size, features=features, price=price, image=image)
         
         return redirect('explore')
     
     return render(request, 'add.html')
+
+def detail(request, pk):
+    laptop = Computer.objects.filter(id=pk).first()
+    
+    return render(request, 'detailed.html', {'laptop': laptop})
